@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Navbar } from '@/components/navbar'
+import Footer from '@/components/footer'
 import './globals.css'
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

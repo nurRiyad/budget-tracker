@@ -16,10 +16,10 @@ export default function Developer() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-zinc-100">
+      <h3 className="text-xl font-semibold text-foreground">
         {footerData.author}
       </h3>
-      <p className="text-sm text-gray-600 dark:text-zinc-400 leading-relaxed">
+      <p className="text-sm text-muted-foreground leading-relaxed">
         {footerData.aboutAuthor}
       </p>
       <div className="flex space-x-3 pt-2">
@@ -27,7 +27,7 @@ export default function Developer() {
           href={socialLinks.githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2.5 bg-gray-200 text-gray-700 rounded-lg dark:bg-sky-700 dark:text-sky-100 hover:bg-gray-300 dark:hover:bg-sky-600 transition-all duration-200 hover:scale-105"
+          className="p-2.5 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 hover:text-foreground transition-all duration-200 hover:scale-105"
           aria-label="Github"
         >
           <Github className="w-4 h-4" />
@@ -36,7 +36,7 @@ export default function Developer() {
           href={socialLinks.linkedinLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2.5 bg-gray-200 text-gray-700 rounded-lg dark:bg-sky-700 dark:text-sky-100 hover:bg-gray-300 dark:hover:bg-sky-600 transition-all duration-200 hover:scale-105"
+          className="p-2.5 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 hover:text-foreground transition-all duration-200 hover:scale-105"
           aria-label="LinkedIn"
         >
           <Linkedin className="w-4 h-4" />
@@ -45,7 +45,7 @@ export default function Developer() {
           href={socialLinks.twitterLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2.5 bg-gray-200 text-gray-700 rounded-lg dark:bg-sky-700 dark:text-sky-100 hover:bg-gray-300 dark:hover:bg-sky-600 transition-all duration-200 hover:scale-105"
+          className="p-2.5 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 hover:text-foreground transition-all duration-200 hover:scale-105"
           aria-label="Twitter"
         >
           <Twitter className="w-4 h-4" />

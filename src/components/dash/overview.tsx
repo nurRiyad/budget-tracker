@@ -1,61 +1,25 @@
 "use client"
 
-import { useAuth } from "@clerk/nextjs"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
 import { 
   DollarSign, 
   TrendingDown, 
   TrendingUp, 
-  Building2, 
-  Calendar,
-  Plus,
-  CheckCircle2,
-  Circle
+  Building2
 } from "lucide-react"
 
 interface OverviewProps {
-  selectedMonth: number;
   selectedYear: number;
   monthName: string;
 }
 
-export default function Overview({ selectedMonth, selectedYear, monthName }: OverviewProps) {
+export default function Overview({ selectedYear, monthName }: OverviewProps) {
 
-    // Mock data - this would normally come from an API based on selectedMonth and selectedYear
+    // Mock data - this would normally come from an API based on selectedYear
     const totalIncome = 8500
     const totalExpenses = 6200
     const netBalance = totalIncome - totalExpenses
     const bankBalance = 12500
-  
-    const fixedExpenses = [
-      { name: "Rent", budget: 2000, spent: 2000, paid: true },
-      { name: "Utilities", budget: 300, spent: 280, paid: true },
-      { name: "Internet", budget: 80, spent: 80, paid: true },
-      { name: "Insurance", budget: 150, spent: 150, paid: true },
-    ]
-  
-    const variableExpenses = [
-      { name: "Food", budget: 1000, spent: 750, category: "Groceries & Dining" },
-      { name: "Transportation", budget: 400, spent: 320, category: "Gas & Public Transit" },
-      { name: "Entertainment", budget: 300, spent: 180, category: "Movies & Activities" },
-      { name: "Shopping", budget: 500, spent: 420, category: "Clothing & Personal" },
-      { name: "Healthcare", budget: 200, spent: 150, category: "Medical & Pharmacy" },
-    ]
-  
-    const incomeSources = [
-      { name: "Salary", amount: 7500, frequency: "Monthly" },
-      { name: "Freelancing", amount: 1000, frequency: "Monthly" },
-    ]
-  
-    const bankAccounts = [
-      { name: "Main Checking", balance: 8500, type: "Checking" },
-      { name: "Savings", balance: 4000, type: "Savings" },
-    ]
 
 
   return (

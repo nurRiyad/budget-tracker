@@ -33,8 +33,8 @@ export default function About() {
               <h2 className="text-2xl font-semibold mb-3">Why Choose BudgetTracker?</h2>
               <p className="text-muted-foreground">
                 Built with modern technology and user experience in mind, BudgetTracker provides an intuitive 
-                interface that makes financial management simple and effective. Whether you're just starting 
-                your financial journey or looking to optimize your existing budget, we're here to help.
+                interface that makes financial management simple and effective. Whether you&apos;re just starting 
+                your financial journey or looking to optimize your existing budget, we&apos;re here to help.
               </p>
             </div>
           </div>

@@ -29,8 +29,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Navbar />
-          <main className="min-h-screen">
+          <div className="fixed top-0 w-full z-50">
+            <Navbar />
+          </div>
+          <main className="min-h-screen pt-16">
             {children}
           </main>
           <Footer />

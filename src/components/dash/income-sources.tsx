@@ -1,0 +1,57 @@
+"use client";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Plus } from "lucide-react";
+
+interface IncomeSource {
+  name: string;
+  amount: number;
+  frequency: string;
+}
+
+interface IncomeSourcesProps {
+  incomeSources: IncomeSource[];
+  onAddIncome: () => void;
+}
+
+export default function IncomeSources({
+  incomeSources,
+  onAddIncome,
+}: IncomeSourcesProps) {
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-xl">Income Sources</CardTitle>
+          <Button size="sm" className="flex items-center gap-2" onClick={onAddIncome}>
+            <Plus className="w-4 h-4" />
+            Add Income
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          {incomeSources.map((income, index) => (
+            <div key={index} className="flex justify-between items-center p-4 bg-green-50 rounded-lg">
+              <div className="flex-1 min-w-0">
+                <p className="font-medium truncate">{income.name}</p>
+                <p className="text-sm text-gray-600">{income.frequency}</p>
+              </div>
+              <div className="flex items-center gap-3 ml-2">
+                <span className="font-bold text-green-600">₹{income.amount.toLocaleString()}</span>
+                <Badge 
+                  variant="outline" 
+                  className="bg-green-100 text-green-700"
+                >
+                  Active
+                </Badge>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

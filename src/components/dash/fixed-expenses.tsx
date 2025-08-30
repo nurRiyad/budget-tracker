@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Check } from "lucide-react";
+import AddFixedExpenseModal from "./add-fixed-expense-modal";
 
 interface FixedExpense {
   name: string;
@@ -25,6 +27,23 @@ export default function FixedExpenses({
   onAddExpense,
   onPayExpense,
 }: FixedExpensesProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddExpense = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalSubmit = (expense: Omit<FixedExpense, 'status'>) => {
+    // Add the new expense with 'unpaid' status
+    const newExpense: FixedExpense = {
+      ...expense,
+      status: 'unpaid'
+    };
+    onAddExpense();
+    // You might want to pass the newExpense to a parent component handler
+    // For now, we'll just close the modal and call the existing onAddExpense
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -35,9 +54,9 @@ export default function FixedExpenses({
               variant="outline"
               className="px-3 py-1.5 text-sm font-medium"
             >
-              ₹ {totalAmount.toLocaleString()}
+              ৳ {totalAmount.toLocaleString()}
             </Badge>
-            <Button size="sm" className="flex items-center gap-2" onClick={onAddExpense}>
+            <Button size="sm" className="flex items-center gap-2" onClick={handleAddExpense}>
               <Plus className="w-4 h-4" />
               Add
             </Button>
@@ -45,7 +64,7 @@ export default function FixedExpenses({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3 max-h-96 overflow-y-auto">
+        <div className="space-y-3 max-h-[500px] overflow-y-auto">
           {expenses.map((expense, index) => (
             <div
               key={index}
@@ -61,7 +80,7 @@ export default function FixedExpenses({
               </div>
               <div className="flex items-center gap-2 ml-2">
                 <span className="text-sm font-medium">
-                  ₹{expense.budgeted.toLocaleString()}
+                  ৳{expense.budgeted.toLocaleString()}
                 </span>
                 {expense.status === "paid" ? (
                   <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
@@ -80,6 +99,12 @@ export default function FixedExpenses({
           ))}
         </div>
       </CardContent>
+      
+      <AddFixedExpenseModal
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onSubmit={handleModalSubmit}
+      />
     </Card>
   );
 }

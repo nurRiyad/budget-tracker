@@ -40,7 +40,7 @@ export default function IncomeSources({
                 <p className="text-sm text-gray-600">{income.frequency}</p>
               </div>
               <div className="flex items-center gap-3 ml-2">
-                <span className="font-bold text-green-600">₹{income.amount.toLocaleString()}</span>
+                <span className="font-bold text-green-600">৳{income.amount.toLocaleString()}</span>
                 <Badge 
                   variant="outline" 
                   className="bg-green-100 text-green-700"

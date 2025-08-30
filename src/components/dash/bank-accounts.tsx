@@ -47,7 +47,7 @@ export default function BankAccounts({
                 <p className="text-xs text-gray-600">Account Type: {account.type}</p>
               </div>
               <div className="flex items-center gap-2 ml-2">
-                <span className="font-bold text-blue-600">₹{account.balance.toLocaleString()}</span>
+                <span className="font-bold text-blue-600">৳{account.balance.toLocaleString()}</span>
                 <Button 
                   size="sm" 
                   variant="outline" 

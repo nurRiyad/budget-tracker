@@ -4,7 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShoppingCart, Wallet } from "lucide-react";
+import { ShoppingCart, Wallet, PiggyBank } from "lucide-react";
 import {
   Header,
   Overview,
@@ -81,6 +81,15 @@ export default function Dashboard() {
 
 
   const fixedExpenses = [
+    { name: "Rent", budgeted: 2000, dueDate: "2024-12-01", status: "paid" as const },
+    { name: "Utilities", budgeted: 300, dueDate: "2024-12-15", status: "paid" as const },
+    { name: "Internet", budgeted: 80, dueDate: "2024-12-20", status: "paid" as const },
+    {
+      name: "Insurance",
+      budgeted: 150,
+      dueDate: "2024-12-25",
+      status: "unpaid" as const,
+    },
     { name: "Rent", budgeted: 2000, dueDate: "2024-12-01", status: "paid" as const },
     { name: "Utilities", budgeted: 300, dueDate: "2024-12-15", status: "paid" as const },
     { name: "Internet", budgeted: 80, dueDate: "2024-12-20", status: "paid" as const },

@@ -14,9 +14,10 @@ import {
   IncomeSources,
   BankAccounts,
 } from "@/components/dash";
+import { getUser } from '@/lib/firestore/user'
 
 export default function Dashboard() {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, userId, isLoaded } = useAuth();
   const router = useRouter();
 
   // State for selected month and year
@@ -32,6 +33,10 @@ export default function Dashboard() {
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
       router.push("/");
+    }
+
+    if (isSignedIn) {
+      getUser(userId);
     }
   }, [isLoaded, isSignedIn, router]);
 

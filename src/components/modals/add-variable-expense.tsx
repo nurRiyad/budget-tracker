@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -11,35 +10,26 @@ import { useForm } from "react-hook-form";
 interface FormData {
   title: string;
   amount: string;
-  date: string;
-  tag: string;
+  budget: string;
   description: string;
 }
 
-interface SurpriseExpense {
-  name: string;
-  amount: number;
-  date: string;
-  category: string;
-}
-
-interface AddSurpriseExpenseModalProps {
+interface AddVariableExpenseModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (expense: Omit<SurpriseExpense, 'name' | 'category'> & { name: string; category: string }) => void;
+  onSubmit: (expense: { name: string; budgeted: number; spent: number }) => void;
 }
 
-export default function AddSurpriseExpenseModal({
+export default function AddVariableExpenseModal({
   isOpen,
   onOpenChange,
   onSubmit,
-}: AddSurpriseExpenseModalProps) {
+}: AddVariableExpenseModalProps) {
   const form = useForm<FormData>({
     defaultValues: {
       title: "",
       amount: "",
-      date: new Date().toISOString().split('T')[0], // Current date as default
-      tag: "",
+      budget: "",
       description: "",
     },
   });
@@ -56,16 +46,15 @@ export default function AddSurpriseExpenseModal({
       return;
     }
 
-    if (!data.date.trim()) {
-      form.setError("date", { message: "Date is required" });
+    if (!data.budget.trim() || isNaN(Number(data.budget)) || Number(data.budget) <= 0) {
+      form.setError("budget", { message: "Budget must be a positive number" });
       return;
     }
 
     const newExpense = {
       name: data.title.trim(),
-      amount: Number(data.amount),
-      date: data.date,
-      category: data.tag.trim() || "Uncategorized",
+      budgeted: Number(data.budget),
+      spent: Number(data.amount),
     };
     
     onSubmit(newExpense);
@@ -82,7 +71,7 @@ export default function AddSurpriseExpenseModal({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Add Surprise Expense</DialogTitle>
+          <DialogTitle>Add Variable Expense</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
@@ -100,53 +89,47 @@ export default function AddSurpriseExpenseModal({
               )}
             />
             
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Amount *</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type="number" 
-                      placeholder="0.00" 
-                      step="0.01"
-                      min="0"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Date *</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="tag"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Tag</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g., Medical, Car, Home" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Amount *</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number" 
+                        placeholder="0.00" 
+                        step="0.01"
+                        min="0"
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="budget"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Budget *</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number" 
+                        placeholder="0.00" 
+                        step="0.01"
+                        min="0"
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             
             <FormField
               control={form.control}

@@ -52,7 +52,7 @@ export default function VariableExpenseDetailsModal({
     description: string;
   }) => {
     // Here you would typically call an API to save the transaction
-    // For now, we'll just close the form and modal
+    // For now, we will just close the form and modal
     console.log("New transaction:", transactionData);
     setShowForm(false);
     onOpenChange(false);

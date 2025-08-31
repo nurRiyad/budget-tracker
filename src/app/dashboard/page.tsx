@@ -4,7 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShoppingCart, Wallet, PiggyBank } from "lucide-react";
+import { ShoppingCart, Wallet } from "lucide-react";
 import {
   Header,
   Overview,

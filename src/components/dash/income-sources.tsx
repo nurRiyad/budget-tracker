@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import AddIncomeModal from "./add-income-modal";
+import AddIncomeModal from "@/components/modals/add-income";
 
 interface IncomeSource {
   name: string;

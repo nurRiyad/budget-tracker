@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Check } from "lucide-react";
-import AddFixedExpenseModal from "./add-fixed-expense-modal";
+import AddFixedExpenseModal from "@/components/modals/add-fixed-expense";
 
 interface FixedExpense {
   name: string;
@@ -39,6 +39,7 @@ export default function FixedExpenses({
       ...expense,
       status: 'unpaid'
     };
+    console.log({ newExpense })
     onAddExpense();
     // You might want to pass the newExpense to a parent component handler
     // For now, we'll just close the modal and call the existing onAddExpense

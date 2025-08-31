@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Plus } from "lucide-react";
-import AddVariableExpenseModal from "./add-variable-expense-modal";
-import VariableExpenseDetailsModal from "./variable-expense-details-modal";
+import AddVariableExpenseModal from "@/components/modals/add-variable-expense";
+import VariableExpenseDetailsModal from "@/components/modals/variable-expense-details";
 
 interface VariableExpense {
   name: string;
@@ -48,6 +48,7 @@ export default function VariableExpenses({
       transactions: 1, // Start with 1 transaction
       remaining: expense.budgeted - expense.spent
     };
+    console.log({newExpense})
     onAddExpense();
     // You might want to pass the newExpense to a parent component handler
     // For now, we'll just close the modal and call the existing onAddExpense
@@ -64,6 +65,7 @@ export default function VariableExpenses({
     {
       id: '1',
       amount: 150,
+      title: 'test',
       date: new Date().toISOString(),
       description: 'Lunch at restaurant',
       category: 'Food'
@@ -71,6 +73,7 @@ export default function VariableExpenses({
     {
       id: '2',
       amount: 80,
+      title: 'test',
       date: new Date(Date.now() - 86400000).toISOString(),
       description: 'Coffee and snacks',
       category: 'Food'
@@ -78,6 +81,7 @@ export default function VariableExpenses({
     {
       id: '3',
       amount: 200,
+      title: 'test',
       date: new Date(Date.now() - 172800000).toISOString(),
       description: 'Dinner with friends',
       category: 'Food'

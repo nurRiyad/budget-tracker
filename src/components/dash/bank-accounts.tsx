@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AddBankAccountModal from "./add-bank-account-modal";
+import AddBankAccountModal from "@/components/modals/add-bank-account";
 
 interface BankAccount {
   name: string;

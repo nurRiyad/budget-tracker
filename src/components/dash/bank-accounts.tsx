@@ -3,17 +3,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus } from "lucide-react";
+import AddBankAccountModal from "./add-bank-account-modal";
 
 interface BankAccount {
   name: string;
   balance: number;
   type: string;
+  description?: string;
 }
 
 interface BankAccountsProps {
   bankAccounts: BankAccount[];
-  onAddAccount: () => void;
+  onAddAccount: (data: { name: string; balance: number; type: string; description?: string }) => void;
   onUpdateAccount: (index: number) => void;
 }
 
@@ -27,10 +28,7 @@ export default function BankAccounts({
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl">Bank Accounts</CardTitle>
-          <Button size="sm" className="flex items-center gap-2" onClick={onAddAccount}>
-            <Plus className="w-4 h-4" />
-            Add Account
-          </Button>
+          <AddBankAccountModal onAddAccount={onAddAccount} />
         </div>
       </CardHeader>
       <CardContent>
@@ -45,6 +43,9 @@ export default function BankAccounts({
                   </Badge>
                 </div>
                 <p className="text-xs text-gray-600">Account Type: {account.type}</p>
+                {account.description && (
+                  <p className="text-xs text-gray-500 mt-1">{account.description}</p>
+                )}
               </div>
               <div className="flex items-center gap-2 ml-2">
                 <span className="font-bold text-blue-600">৳{account.balance.toLocaleString()}</span>

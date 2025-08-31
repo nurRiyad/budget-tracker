@@ -1,19 +1,19 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus } from "lucide-react";
+import AddIncomeModal from "./add-income-modal";
 
 interface IncomeSource {
   name: string;
   amount: number;
   frequency: string;
+  date: Date;
 }
 
 interface IncomeSourcesProps {
   incomeSources: IncomeSource[];
-  onAddIncome: () => void;
+  onAddIncome: (income: { name: string; amount: number; date: Date }) => void;
 }
 
 export default function IncomeSources({
@@ -25,10 +25,7 @@ export default function IncomeSources({
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl">Income Sources</CardTitle>
-          <Button size="sm" className="flex items-center gap-2" onClick={onAddIncome}>
-            <Plus className="w-4 h-4" />
-            Add Income
-          </Button>
+          <AddIncomeModal onAddIncome={onAddIncome} />
         </div>
       </CardHeader>
       <CardContent>
@@ -38,6 +35,9 @@ export default function IncomeSources({
               <div className="flex-1 min-w-0">
                 <p className="font-medium truncate">{income.name}</p>
                 <p className="text-sm text-gray-600">{income.frequency}</p>
+                <p className="text-xs text-gray-500">
+                  {income.date.toLocaleDateString()}
+                </p>
               </div>
               <div className="flex items-center gap-3 ml-2">
                 <span className="font-bold text-green-600">৳{income.amount.toLocaleString()}</span>

@@ -23,6 +23,12 @@ export default function Dashboard() {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
+  // State for income sources
+  const [incomeSources, setIncomeSources] = useState([
+    { name: "Salary", amount: 7500, frequency: "Monthly", date: new Date() },
+    { name: "Freelancing", amount: 1000, frequency: "Monthly", date: new Date() },
+  ]);
+
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
       router.push("/");
@@ -61,8 +67,6 @@ export default function Dashboard() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 5 }, (_, i) => currentYear - 2 + i);
 
-
-
   // Function to handle month/year changes
   const handleMonthChange = (month: number) => {
     setSelectedMonth(month);
@@ -78,6 +82,14 @@ export default function Dashboard() {
     // This would update the Overview component data and all expense/income data
   };
 
+  // Function to handle adding new income
+  const handleAddIncome = (newIncome: { name: string; amount: number; date: Date }) => {
+    const incomeWithFrequency = {
+      ...newIncome,
+      frequency: "One-time" // You could add a frequency selector in the modal if needed
+    };
+    setIncomeSources(prev => [...prev, incomeWithFrequency]);
+  };
 
 
   const fixedExpenses = [
@@ -154,11 +166,6 @@ export default function Dashboard() {
     },
   ];
 
-  const incomeSources = [
-    { name: "Salary", amount: 7500, frequency: "Monthly" },
-    { name: "Freelancing", amount: 1000, frequency: "Monthly" },
-  ];
-
   const bankAccounts = [
     { name: "Main Checking", balance: 8500, type: "Checking" },
     { name: "Savings", balance: 4000, type: "Savings" },
@@ -182,7 +189,6 @@ export default function Dashboard() {
 
       {/* Main Overview Cards */}
       <Overview
-        selectedMonth={selectedMonth}
         selectedYear={selectedYear}
         monthName={monthNames[selectedMonth]}
       />
@@ -244,18 +250,17 @@ export default function Dashboard() {
             {/* Income Sources */}
             <IncomeSources
               incomeSources={incomeSources}
-              onAddIncome={() => {
-                // Handle add income logic
-                console.log("Add income clicked");
-              }}
+              onAddIncome={handleAddIncome}
             />
 
             {/* Bank Accounts */}
             <BankAccounts
               bankAccounts={bankAccounts}
-              onAddAccount={() => {
-                // Handle add account logic
-                console.log("Add account clicked");
+              onAddAccount={(data) => {
+                // Handle add account logic with the new data structure
+                console.log("Add account clicked with data:", data);
+                // Here you would typically add the new account to your state/database
+                // For now, we'll just log it
               }}
               onUpdateAccount={(index) => {
                 // Handle update account logic
